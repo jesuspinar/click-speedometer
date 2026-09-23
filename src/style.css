@@ -1,0 +1,1384 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Space+Grotesk:wght@400;500;600;650;700&display=swap");
+
+:root {
+  color-scheme: dark;
+  --bg: #080b0d;
+  --text: #f1f3ec;
+  --muted: #858d91;
+  --line: #ffffff16;
+  --accent: #c9f88a;
+  /* Fonts */
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-body: "DM Sans", Arial, sans-serif;
+  --font-title: "Space Grotesk";
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+button {
+  color: inherit;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+.app {
+  max-width: 1460px;
+  margin: auto;
+  padding: 0 52px;
+}
+
+header {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.8px;
+}
+
+.brand-icon {
+  background: var(--accent);
+  color: #13180c;
+  width: 40px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  font-size: 45px;
+  clip-path: polygon(12% 0, 100% 0, 100% 84%, 86% 100%, 0 100%, 0 14%);
+}
+
+.brand-sub {
+  display: block;
+  font-family: var(--font-title);
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+.header-caption {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font: 11px var(--font-title);
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 9px #c8ff5960;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icon-button {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+.sound-slash {
+  position: absolute;
+  left: 16px;
+  top: 6px;
+}
+
+.shop-button {
+  height: 42px;
+  padding: 0 18px;
+  background: var(--accent);
+  color: #111;
+  font: 700 12px var(--font-title);
+  border: 0;
+}
+
+.shop-button span {
+  margin-left: 18px;
+  font-size: 14px;
+}
+
+.page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 34px 0 27px;
+}
+
+.eyebrow {
+  font: 11px var(--font-title);
+  letter-spacing: 1.8px;
+  color: var(--muted);
+}
+
+h1 {
+  font: 400 clamp(32px, 3.7vw, 52px)/1.1 var(--font-title);
+  letter-spacing: -.055em;
+  margin: 8px 0 0;
+}
+
+h1 > span,
+h2 > span:not(#stage-number):not(#stage-name) {
+  color: var(--accent);
+}
+
+.wallet {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.credit-icon {
+  color: var(--accent);
+  font-size: 31px;
+}
+
+.wallet strong {
+  font: 700 24px var(--font-title);
+}
+
+.wallet small {
+  display: block;
+  font: 9px var(--font-title);
+  letter-spacing: 1.4px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  margin-bottom: 18px;
+}
+
+.metric {
+  padding: 20px 25px;
+  position: relative;
+}
+
+.metric + .metric {
+  border-left: 1px solid var(--line);
+}
+
+.metric > span:first-child {
+  font: 10px var(--font-title);
+  letter-spacing: 1.6px;
+  color: var(--muted);
+}
+
+.metric > div:not(.timer-track) {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 6px 0;
+}
+
+.metric strong {
+  font: 500 47px/1 var(--font-body);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+}
+
+.metric small {
+  font: 10px var(--font-title);
+  color: var(--muted);
+}
+
+.metric-note {
+  font: 9px var(--font-title);
+  letter-spacing: 0.8px;
+  color: var(--muted);
+}
+
+.metric-note b {
+  color: #d9dfce;
+  font-weight: 400;
+}
+
+.timer-track {
+  height: 3px;
+  background: #333a29;
+  margin-top: 13px;
+  width: 100%;
+}
+
+.timer-track i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.1s linear;
+}
+
+.flight {
+  height: 460px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 62% 40%, #163b37 0, #0a1719 34%, #060b0c 75%);
+  border: 1px solid #384338;
+  isolation: isolate;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.flight canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+}
+
+.scene-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #07100adc, transparent 62%), linear-gradient(0deg, #06110dc0, transparent 35%);
+  pointer-events: none;
+}
+
+.flight-top {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 26px;
+  left: 28px;
+  right: 28px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.flight-top .eyebrow {
+  font-size: 9px;
+  color: #96afa1;
+}
+
+.flight-top h2 {
+  font: 500 23px var(--font-title);
+  margin: 7px 0;
+}
+
+.flight-top h2 > #stage-number {
+  color: var(--accent);
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+.mode {
+  font: 9px var(--font-mono);
+  letter-spacing: 1px;
+  color: var(--accent);
+  padding: 8px 10px;
+  border: 1px solid #abc97544;
+  height: 30px;
+  background: #0a1c1460;
+}
+
+.coordinates {
+  position: absolute;
+  right: 30px;
+  top: 90px;
+  color: #819b8e;
+  font: 9px/1.8 var(--font-title);
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+.flight-center {
+  position: absolute;
+  left: 8%;
+  top: 130px;
+  z-index: 5;
+}
+
+.orbit-label {
+  font: 9px var(--font-title);
+  color: var(--accent);
+  letter-spacing: 2.3px;
+}
+
+.flight-center h3 {
+  font: 600 58px/0.98 var(--font-title);
+  letter-spacing: 0.3px;
+  margin: 12px 0;
+}
+
+.flight-center h3 em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.flight-center p {
+  font-size: 13px;
+  color: #a8b6aa;
+  margin: 14px 0 22px;
+}
+
+.launch-button {
+  display: block;
+  background: var(--accent);
+  border: 0;
+  padding: 16px 22px;
+  min-width: 214px;
+  color: #17200d;
+  font: 700 12px var(--font-title);
+  letter-spacing: 0.5px;
+}
+
+.launch-button span {
+  margin-left: 35px;
+}
+
+.flight-center > small {
+  display: block;
+  font-size: 10px;
+  color: #94a290;
+  margin-top: 13px;
+}
+
+.speed-display {
+  position: absolute;
+  right: 10%;
+  bottom: 62px;
+  text-align: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.speed-display > span {
+  color: #d0e2c9;
+  font: 9px var(--font-title);
+  letter-spacing: 3px;
+}
+
+.speed-display > div:not(.speed-ticks) {
+  margin-top: 3px;
+}
+
+.speed-display strong {
+  font: 500 74px/1 var(--font-body);
+  letter-spacing: 1px;
+  text-shadow: 0 0 30px #c8ff5940;
+}
+
+.speed-display b {
+  color: var(--accent);
+  font: italic 21px serif;
+  margin-left: 7px;
+}
+
+.speed-display small {
+  color: #809487;
+  font: 8px var(--font-title);
+  letter-spacing: 1.8px;
+}
+
+.speed-ticks {
+  height: 9px;
+  width: 180px;
+  margin: 10px auto 7px;
+  background: repeating-linear-gradient(90deg, #89a68c 0 1px, transparent 1px 8px);
+  mask-image: linear-gradient(90deg, transparent, #000 35%, #000 65%, transparent);
+}
+
+.ship-info {
+  position: absolute;
+  left: 28px;
+  bottom: 62px;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ship-info strong {
+  font: 500 29px var(--font-body);
+}
+
+.ship-info > span:last-child {
+  font: 9px var(--font-title);
+  color: #97ac98;
+}
+
+.flight.flying .ship-info {
+  display: flex;
+}
+
+.flight-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 37px;
+  border-top: 1px solid #71876233;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #8b9e8d;
+  font: 9px var(--font-title);
+  letter-spacing: 1.5px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.flight-bottom b {
+  color: var(--accent);
+  margin-left: 12px;
+}
+
+.flight-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  z-index: 3;
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+
+.active-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 118px;
+  text-align: center;
+  font: 11px var(--font-title);
+  letter-spacing: 3px;
+  color: #dce9dc;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.active-hint span {
+  display: block;
+  color: var(--accent);
+  font-size: 9px;
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+.stage-flash {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  font: 600 48px var(--font-body);
+  color: var(--accent);
+  pointer-events: none;
+  z-index: 2;
+  text-shadow: 0 0 40px #c8ff59;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.stage-flash.show {
+  opacity: 1;
+}
+
+.click-pop {
+  position: absolute;
+  color: var(--accent);
+  font: 700 20px var(--font-title);
+  z-index: 7;
+  pointer-events: none;
+  animation: rise 0.65s ease-out forwards;
+}
+
+@keyframes rise {
+  to {
+    opacity: 0;
+    transform: translateY(-55px);
+  }
+}
+
+.journey {
+  margin-top: 23px;
+}
+
+.journey-heading {
+  display: flex;
+  justify-content: space-between;
+  font: 9px var(--font-title);
+  letter-spacing: 1.2px;
+  color: var(--muted);
+  margin-bottom: 17px;
+}
+
+.journey-heading > span:last-child {
+  color: var(--accent);
+}
+
+.stages {
+  display: flex;
+  gap: 7px;
+}
+
+.stage {
+  flex: 1;
+  min-width: 0;
+  border-top: 3px solid #343b2c;
+  padding-top: 12px;
+  display: flex;
+  gap: 11px;
+  color: #858e79;
+}
+
+.stage.active {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.stage.complete {
+  border-color: #6c8e3c;
+}
+
+.stage > span {
+  font: 11px var(--font-title);
+  color: #6e7960;
+  padding-top: 2px;
+}
+
+.stage.active > span {
+  color: var(--accent);
+}
+
+.stage strong {
+  font-size: 12px;
+  font-weight: 500;
+  display: block;
+}
+
+.stage small {
+  font: 9px var(--font-title);
+  display: block;
+  color: #727e67;
+  margin-top: 5px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #727c66;
+  padding: 29px 0 22px;
+  font-size: 11px;
+  gap: 16px;
+}
+
+footer > span:nth-child(2) {
+  font: 8px var(--font-title);
+  letter-spacing: 1.2px;
+}
+
+footer i {
+  margin: 0 9px;
+}
+
+footer button {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font: 8px var(--font-title);
+  padding: 8px 0;
+}
+
+dialog {
+  width: min(950px, calc(100% - 32px));
+  border: 1px solid #a8c4ae35;
+  background: #101717f5;
+  color: var(--text);
+  padding: 35px;
+  max-height: 90dvh;
+  overflow: auto;
+  border-radius: 16px;
+  box-shadow: 0 30px 100px #0008;
+  backdrop-filter: blur(25px);
+}
+
+dialog::backdrop {
+  background: #04080735;
+  backdrop-filter: blur(8px);
+}
+
+.dialog-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dialog-top h2,
+dialog > h2 {
+  font: 600 48px/1 var(--font-title);
+  margin: 8px 0 0;
+}
+
+.close {
+  background: none;
+  border: 1px solid var(--line);
+  width: 35px;
+  height: 35px;
+  font-size: 24px;
+  line-height: 1;
+  border-radius: 50%;
+}
+
+.shop-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 12px 0 25px;
+}
+
+.shop-intro p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.shop-intro > span {
+  color: var(--accent);
+  font: 11px var(--font-title);
+}
+
+.ship-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.ship-card {
+  padding: 17px 13px;
+  background: var(--bg);
+  border: 1px solid var(--muted);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ship-card.equipped {
+  border-color: var(--accent);
+}
+
+.ship-card .ship-glyph {
+  font: 500 50px var(--font-body);
+  color: var(--ship-color);
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #ffffff15;
+  margin-bottom: 16px;
+}
+
+.ship-card small {
+  font: 8px var(--font-title);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.ship-card h3 {
+  font: 500 28px var(--font-title);
+  margin: 8px 0;
+}
+
+.ship-card p {
+  color: #9fab94;
+  font-size: 12px;
+  line-height: 1.6;
+  min-height: 58px;
+}
+
+.ship-card .spec {
+  font: 9px/2 var(--font-title);
+  color: #c5d5b7;
+}
+
+.ship-card button {
+  margin-top: 20px;
+  padding: 12px 4px;
+  border: 1px solid #697c50;
+  background: transparent;
+  font: 9px var(--font-title);
+  color: var(--accent);
+}
+
+.ship-card.equipped button {
+  background: var(--accent);
+  color: #17200d;
+}
+
+.shop-foot {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 24px 0 0;
+}
+
+#shop-message {
+  color: var(--accent);
+  font-size: 13px;
+  min-height: 18px;
+}
+
+#result-dialog {
+  max-width: 540px;
+  text-align: center;
+  padding: 32px;
+}
+
+#result-dialog > .dialog-top {
+  align-items: center;
+  text-align: left;
+}
+
+#result-dialog .eyebrow {
+  font-size: 9px;
+  line-height: 1.7;
+}
+
+#result-dialog > h2 {
+  font-size: 48px;
+  margin-top: 25px;
+}
+
+.result-score {
+  margin: 28px 0;
+}
+
+.result-score strong {
+  font: 600 90px/0.95 var(--font-body);
+  color: var(--accent);
+  display: block;
+}
+
+.result-score > span {
+  font: 10px var(--font-title);
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+}
+
+.result-stats strong {
+  font: 500 28px var(--font-body);
+  display: block;
+}
+
+.result-stats span {
+  font: 8px var(--font-title);
+  color: var(--muted);
+}
+
+#result-credit {
+  font-size: 13px;
+  color: var(--accent);
+  margin: 23px 0;
+}
+
+#result-dialog .launch-button {
+  width: 100%;
+}
+
+.secondary {
+  background: transparent;
+  border: 1px solid var(--line);
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  font: 11px var(--font-title);
+}
+
+#help-dialog {
+  max-width: 590px;
+}
+
+#help-dialog ol {
+  padding-left: 22px;
+  color: #aeb9a5;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+#help-dialog li {
+  margin: 18px 0;
+}
+
+#help-dialog strong {
+  color: var(--text);
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 22px;
+  background: var(--accent);
+  color: #111;
+  font-size: 13px;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (min-width: 1500px) {
+  .flight {
+    height: 510px;
+  }
+
+  .flight-center {
+    top: 150px;
+  }
+
+  .flight-center h3 {
+    font-size: 66px;
+  }
+}
+
+@media (max-width: 900px) {
+  .app {
+    padding: 0 28px;
+  }
+
+  .header-caption {
+    display: none;
+  }
+
+  .ship-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ship-card:last-child {
+    grid-column: auto;
+  }
+
+  .flight {
+    height: 440px;
+  }
+
+  .flight-center {
+    left: 6%;
+  }
+
+  .speed-display {
+    right: 7%;
+    bottom: 85px;
+  }
+
+  .speed-display strong {
+    font-size: 62px;
+  }
+
+  footer > span:nth-child(2) {
+    display: none;
+  }
+
+  .metric {
+    padding: 17px 19px;
+  }
+
+  .stage {
+    gap: 7px;
+  }
+
+  .stage strong {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding: 0 16px;
+  }
+
+  header {
+    height: 78px;
+    gap: 10px;
+  }
+
+  .brand {
+    font-size: 17px;
+  }
+
+  .brand-icon {
+    height: 37px;
+    width: 33px;
+    font-size: 37px;
+  }
+
+  .brand-sub {
+    font-size: 8px;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .icon-button {
+    width: 29px;
+    height: 29px;
+    font-size: 13px;
+  }
+
+  .sound-slash {
+    top: 5px;
+    left: 13px;
+  }
+
+  .shop-button {
+    font-size: 11px;
+    padding: 0 10px;
+    height: 35px;
+  }
+
+  .shop-button span {
+    margin-left: 6px;
+    font-size: 13px;
+  }
+
+  .page-heading {
+    padding: 26px 0 22px;
+    gap: 12px;
+  }
+
+  .page-heading .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.2px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .wallet {
+    gap: 6px;
+  }
+
+  .wallet strong {
+    font-size: 19px;
+  }
+
+  .wallet small {
+    font-size: 7px;
+    max-width: 58px;
+    line-height: 1.5;
+  }
+
+  .credit-icon {
+    font-size: 24px;
+  }
+
+  .dashboard {
+    margin-bottom: 12px;
+  }
+
+  .metric {
+    padding: 13px 10px;
+  }
+
+  .metric > span:first-child {
+    font-size: 8px;
+    letter-spacing: 0.4px;
+  }
+
+  .metric strong {
+    font-size: 34px;
+  }
+
+  .metric > div:not(.timer-track) {
+    gap: 5px;
+  }
+
+  .metric small {
+    font-size: 7px;
+  }
+
+  .metric-note {
+    font-size: 6px;
+    letter-spacing: 0.3px;
+  }
+
+  .timer-track {
+    margin-top: 10px;
+  }
+
+  .flight {
+    height: 480px;
+  }
+
+  .flight-top {
+    top: 19px;
+    left: 18px;
+    right: 18px;
+  }
+
+  .mode {
+    font-size: 7px;
+    padding: 8px 6px;
+    letter-spacing: 0.3px;
+  }
+
+  .flight-top h2 {
+    font-size: 21px;
+  }
+
+  .flight-center {
+    top: 124px;
+    left: 23px;
+  }
+
+  .flight-center h3 {
+    font-size: 53px;
+  }
+
+  .flight-center p {
+    font-size: 12px;
+  }
+
+  .flight-center > small {
+    font-size: 8px;
+  }
+
+  .launch-button {
+    min-width: 198px;
+    font-size: 10px;
+    padding: 15px 17px;
+  }
+
+  .speed-display {
+    right: 19px;
+    bottom: 55px;
+  }
+
+  .speed-display strong {
+    font-size: 45px;
+  }
+
+  .speed-display > span {
+    font-size: 8px;
+  }
+
+  .speed-ticks {
+    width: 100px;
+  }
+
+  .speed-display small {
+    font-size: 6px;
+  }
+
+  .coordinates {
+    right: 20px;
+    font-size: 7px;
+    top: 78px;
+  }
+
+  .flight-bottom {
+    font-size: 7px;
+    padding: 0 17px;
+    letter-spacing: 0.5px;
+  }
+
+  .stage-flash {
+    font-size: 37px;
+  }
+
+  .ship-info {
+    left: 20px;
+    bottom: 62px;
+  }
+
+  .ship-info strong {
+    font-size: 25px;
+  }
+
+  .ship-info > span:last-child {
+    font-size: 7px;
+  }
+
+  .journey {
+    margin-top: 22px;
+  }
+
+  .journey-heading {
+    font-size: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .stages {
+    gap: 5px;
+  }
+
+  .stage {
+    display: block;
+    padding-top: 8px;
+  }
+
+  .stage > span {
+    font-size: 9px;
+  }
+
+  .stage strong {
+    font-size: 9px;
+    margin-top: 6px;
+  }
+
+  .stage small {
+    font-size: 7px;
+  }
+
+  footer {
+    font-size: 10px;
+    padding-top: 25px;
+  }
+
+  footer button {
+    font-size: 7px;
+  }
+
+  .ship-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  dialog {
+    padding: 22px;
+  }
+
+  .shop-intro {
+    align-items: flex-start;
+  }
+
+  .shop-intro p {
+    font-size: 12px;
+  }
+
+  .shop-intro > span {
+    font-size: 10px;
+    padding-top: 12px;
+    white-space: nowrap;
+  }
+
+  .dialog-top h2 {
+    font-size: 42px;
+  }
+
+  .shop-foot {
+    font-size: 11px;
+  }
+
+  .result-stats span {
+    font-size: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body.reduced .click-pop {
+  display: none;
+}
+
+/* Ship comparisons use the same models as the flight scene. */
+.ship-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ship-card .ship-glyph {
+  height: 150px;
+  background: radial-gradient(ellipse, #42543645, transparent 70%);
+  margin-bottom: 14px;
+}
+
+.ship-glyph img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ship-glyph span {
+  font: 12px var(--font-title);
+  letter-spacing: 1px;
+}
+
+.ship-card small {
+  font-size: 12px;
+  white-space: normal;
+}
+
+.ship-card p {
+  font-size: 14px;
+  min-height: 66px;
+}
+
+.ship-card .spec {
+  font-size: 12px;
+  line-height: 2;
+}
+
+.ship-card .spec strong {
+  font-weight: 400;
+  color: var(--ship-color);
+}
+
+.ship-card button {
+  font-size: 12px;
+  min-height: 44px;
+}
+
+.shop-intro p {
+  font-size: 16px;
+}
+
+.shop-foot {
+  font-size: 14px;
+}
+
+.flight-center p {
+  max-width: 330px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ship-info > span:last-child {
+  font-size: 12px;
+  max-width: 230px;
+  line-height: 1.5;
+}
+
+#flight-duration {
+  font-weight: 400;
+}
+
+@media (max-width: 600px) {
+  .ship-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ship-card {
+    padding: 14px 10px;
+  }
+
+  .ship-card .ship-glyph {
+    height: 112px;
+  }
+
+  .ship-card p {
+    min-height: 90px;
+  }
+
+  .ship-card .spec {
+    font-size: 12px;
+  }
+
+  .shop-intro {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .flight-center p {
+    max-width: 270px;
+  }
+
+  .ship-info > span:last-child {
+    max-width: 175px;
+  }
+
+  .flight-center {
+    right: 16px;
+  }
+
+  .flight-center p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .ship-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ship-card p {
+    min-height: 0;
+  }
+}

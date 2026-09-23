@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10130e">
+  <meta name="description"
+    content="Five ships. Five stages. Choose your speed and flight time. Click to accelerate through space and upgrade your fleet.">
+  <title>Click Speedometer — Chase lightspeed</title>
+  <link
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23080b0d'/%3E%3Cellipse cx='16' cy='16' rx='13' ry='5' fill='none' stroke='%23cbfa87' transform='rotate(-30 16 16)'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23cbfa87'/%3E%3C/svg%3E"
+    rel="icon" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="app">
+    <header>
+      <a class="brand" href="./" aria-label="Click Speedometer home">
+        <span class="brand-icon">ϟ</span>
+        <span>CLICK<span class="brand-sub">SPEEDOMETER</span></span>
+      </a>
+      <div class="header-caption">
+        <span class="status-dot"></span> FLIGHT SYSTEM ONLINE
+      </div>
+      <div class="header-actions">
+        <button class="icon-button" id="sound" aria-label="Enable sound" title="Sound">
+          ♫ <span class="sound-slash">/</span>
+        </button>
+        <button class="icon-button" id="help" aria-label="How to play">
+          ?
+        </button>
+        <a class="icon-button" href="https://github.com/jesuspinar/click-speedometer" target="_blank"
+          rel="noopener noreferrer" id="github" aria-label="View Source code" title="Github">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 640 640">
+            <!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+            <path
+              d="M280.5 426.5C214.5 418.5 168 371 168 309.5C168 284.5 177 257.5 192 239.5C185.5 223 186.5 188 194 173.5C214 171 241 181.5 257 196C276 190 296 187 320.5 187C345 187 365 190 383 195.5C398.5 181.5 426 171 446 173.5C453 187 454 222 447.5 239C463.5 258 472 283.5 472 309.5C472 371 425.5 417.5 358.5 426C375.5 437 387 461 387 488.5L387 540.5C387 555.5 399.5 564 414.5 558C505 523.5 576 433 576 321C576 179.5 461 64 319.5 64C178 64 64 179.5 64 321C64 432 134.5 524 229.5 558.5C243 563.5 256 554.5 256 541L256 501C249 504 240 506 232 506C199 506 179.5 488 165.5 454.5C160 441 154 433 142.5 431.5C136.5 431 134.5 428.5 134.5 425.5C134.5 419.5 144.5 415 154.5 415C169 415 181.5 424 194.5 442.5C204.5 457 215 463.5 227.5 463.5C240 463.5 248 459 259.5 447.5C268 439 274.5 431.5 280.5 426.5z" />
+          </svg>
+        </a>
+        <button class="shop-button" id="shop">
+          SHIP SHOP
+          <span aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.5 20.5L17 7M9 7H17V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </span>
+        </button>
+
+      </div>
+    </header>
+    <main>
+      <div class="page-heading">
+        <div>
+          <div class="eyebrow">CHOOSE YOUR SHIP. CHASE LIGHTSPEED.</div>
+          <h1>How fast can you fly<span>?</span></h1>
+        </div>
+        <div class="wallet">
+          <span class="credit-icon">◈</span>
+          <div>
+            <strong id="wallet">0</strong><small>AVAILABLE CREDITS</small>
+          </div>
+        </div>
+      </div>
+      <section class="dashboard" aria-label="Flight dashboard">
+        <div class="metric">
+          <span>TIME REMAINING</span>
+          <div><strong id="timer">35.0</strong><small>SEC</small></div>
+          <div class="timer-track"><i id="timer-bar"></i></div>
+        </div>
+        <div class="metric">
+          <span>FLIGHT POINTS</span>
+          <div><strong id="score">000</strong><small>PTS</small></div>
+          <span class="metric-note" id="multiplier">
+            1× CLICK MULTIPLIER
+          </span>
+        </div>
+        <div class="metric">
+          <span>CLICK SPEED</span>
+          <div>
+            <strong id="cps">0.0</strong>
+            <small>CLICKS / SEC</small>
+          </div>
+          <span class="metric-note">
+            PERSONAL BEST <b id="best">0</b> PTS
+          </span>
+        </div>
+      </section>
+      <section class="flight" id="flight" aria-label="Space flight area">
+        <canvas id="space" aria-hidden="true"></canvas>
+        <div class="scene-shade"></div>
+        <div class="flight-top">
+          <div>
+            <span class="eyebrow" id="sector">EARTH ORBIT</span>
+            <h2><span id="stage-number">01</span> / <span id="stage-name">Departure</span></h2>
+          </div>
+          <span class="mode" id="flight-status">● READY FOR LAUNCH</span>
+        </div>
+        <div class="coordinates">SOL SYSTEM<br>28° 34′ 24.0″ N</div>
+        <div class="flight-center" id="launch-panel">
+          <span class="orbit-label">ALL SYSTEMS GO</span>
+          <h3>Your clicks.<br>Your <em>velocity.</em></h3>
+          <p id="launch-description">Pioneer · +1 speed / click · 35s flight</p>
+          <button id="launch" class="launch-button">
+            INITIATE LAUNCH
+            <span aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.5 20.5L17 7M9 7H17V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </span>
+          </button>
+          <small>Click anywhere in the flight area to accelerate</small>
+        </div>
+        <div id="active-hint" class="active-hint" hidden>
+          KEEP CLICKING <span>+1 THRUST</span>
+        </div>
+        <div id="stage-flash" class="stage-flash" aria-live="polite"></div>
+        <div class="speed-display">
+          <span>VELOCITY</span>
+          <div><strong id="velocity">0.00</strong><b>c</b></div>
+          <div class="speed-ticks" aria-hidden="true"></div>
+          <small>SPEED OF LIGHT</small>
+        </div>
+        <div class="ship-info">
+          <span class="eyebrow">YOUR SHIP</span><strong id="ship-name">Pioneer</strong>
+          <span id="ship-spec">CARGO · +1 SPEED · 35s</span>
+        </div>
+        <div class="flight-bottom">
+          <span id="engine-status">ENGINE IDLE</span>
+          <span>CLICK TO APPLY THRUST
+            <span aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.5 20.5L17 7M9 7H17V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </span>
+          </span>
+        </div>
+        <button class="flight-input" id="flight-input" aria-label="Apply thrust" tabindex="-1" hidden></button>
+      </section>
+      <section class="journey">
+        <div class="journey-heading">
+          <span>YOUR FLIGHT PATH</span>
+          <span id="next-stage">70 PTS TO NEXT STAGE</span>
+        </div>
+        <div class="stages" id="stages"></div>
+      </section>
+      <footer>
+        <span>Every click takes you further.</span>
+        <span>
+          <b id="flight-duration">35 SECONDS</b>
+          <i>·</i> 5 STAGES
+          <i>·</i> INFINITE AMBITION
+        </span>
+        <button id="motion">REDUCED MOTION: OFF</button>
+      </footer>
+    </main>
+  </div>
+  <dialog id="shop-dialog">
+    <div class="dialog-top">
+      <div>
+        <span class="eyebrow">UPGRADE YOUR HORIZONS</span>
+        <h2>The hangar<span>.</span></h2>
+      </div>
+      <button class="close" data-close aria-label="Close shop">×</button>
+    </div>
+    <div class="shop-intro">
+      <p>More speed or more time? Choose your flight.</p>
+      <span>◈ <b id="shop-wallet">0</b> CREDITS</span>
+    </div>
+    <div class="ship-grid" id="ship-grid"></div>
+    <p class="shop-foot">
+      Purchases and your best score are saved on this device. Ships can be changed between flights.
+    </p>
+    <p id="shop-message" role="status"></p>
+  </dialog>
+  <dialog id="result-dialog">
+    <div class="dialog-top">
+      <span class="eyebrow">FLIGHT RECORDER / MISSION COMPLETE</span>
+      <button class="close" data-close aria-label="Close results">
+        ×
+      </button>
+    </div>
+    <h2 id="result-title">A little closer<br>to the stars.</h2>
+    <div class="result-score">
+      <strong id="result-score">0</strong>
+      <span>FLIGHT POINTS</span>
+    </div>
+    <div class="result-stats">
+      <div><strong id="result-clicks">0</strong><span>RAW CLICKS</span></div>
+      <div><strong id="result-cps">0</strong><span>AVG. CLICKS / SEC</span></div>
+      <div><strong id="result-stage">1 / 5</strong><span>STAGE REACHED</span></div>
+    </div>
+    <p id="result-credit"></p>
+    <button class="launch-button" id="again">FLY AGAIN
+      <span aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.5 20.5L17 7M9 7H17V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </span>
+    </button>
+    <button class="secondary" id="result-shop">VISIT SHIP SHOP</button>
+  </dialog>
+  <dialog id="help-dialog">
+    <div class="dialog-top">
+      <h2>Flight manual<span>.</span></h2>
+      <button class="close" data-close aria-label="Close instructions">×</button>
+    </div>
+    <ol>
+      <li>
+        <strong>Launch your flight.</strong> The countdown starts when you press Initiate Launch.
+      </li>
+      <li>
+        <strong>Click or tap the flight area.</strong> Every input adds points and accelerates your ship. You can also
+        press Space during a flight.
+      </li>
+      <li>
+        <strong>Break through five stages.</strong> Reach 70, 180, 350 and 600 points before your ship’s timer runs out.
+      </li>
+      <li>
+        <strong>Upgrade your ship.</strong> All flight points become credits after each run. Each ship has a different
+        shape, speed gain and flight time. Cargo flies for 35 seconds at +1 speed per click; Stealth flies for 12
+        seconds at +5. Speed gain also determines points per click; raw click speed stays honest.
+      </li>
+    </ol>
+    <p class="shop-foot">
+      Velocity is an arcade simulation. Faster clicking adds thrust; engine momentum fades smoothly
+      when you slow down.
+    </p>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+
+</html>
